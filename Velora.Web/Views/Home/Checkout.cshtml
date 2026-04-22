@@ -1,0 +1,131 @@
+@{
+    ViewData["Title"] = "Checkout - Velora";
+}
+
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-8">
+            <h2 class="section-title mb-4">Checkout</h2>
+            
+            <div class="card border-0 shadow-sm p-4 mb-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">1</div>
+                    <h5 class="mb-0 fw-600">Shipping Information</h5>
+                </div>
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="variant-label">First Name</label>
+                        <input type="text" class="newsletter-input" placeholder="Julian">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="variant-label">Last Name</label>
+                        <input type="text" class="newsletter-input" placeholder="Voss">
+                    </div>
+                    <div class="col-12">
+                        <label class="variant-label">Street Address</label>
+                        <input type="text" class="newsletter-input" placeholder="128 Atmospheric Lane">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="variant-label">City</label>
+                        <input type="text" class="newsletter-input" placeholder="San Francisco">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="variant-label">State</label>
+                        <input type="text" class="newsletter-input" placeholder="CA">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="variant-label">ZIP</label>
+                        <input type="text" class="newsletter-input" placeholder="94103">
+                    </div>
+                    <div class="col-12">
+                        <label class="variant-label">Email for Updates</label>
+                        <input type="email" class="newsletter-input" placeholder="julian@voss-studio.com">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4 mb-4 bg-light">
+                <div class="d-flex align-items-center text-muted">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">2</div>
+                    <h5 class="mb-0 fw-600">Delivery Method</h5>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4 bg-light">
+                <div class="d-flex align-items-center text-muted">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">3</div>
+                    <h5 class="mb-0 fw-600">Payment Information</h5>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <button class="btn btn-velora py-3 px-5">Continue to Delivery <i class="bi bi-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 120px;">
+                <h5 class="fw-600 mb-4">Your Cart</h5>
+                
+                <div class="d-flex gap-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: #f6f6f6; border-radius: 4px;">
+                        <img src="/images/lamp.png" class="w-100 h-100 object-fit-contain p-2">
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-600">Horizon Table Lamp</h6>
+                        <p class="text-muted small mb-1">Matte Bone / Soft Warm</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small">Qty: 1</span>
+                            <span class="fw-600">$189.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 mb-4">
+                    <div style="width: 80px; height: 80px; background: #f6f6f6; border-radius: 4px;">
+                        <img src="/images/print.png" class="w-100 h-100 object-fit-contain p-2">
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 fw-600">Serenity Art Print</h6>
+                        <p class="text-muted small mb-1">24" x 36" / Oak Frame</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small">Qty: 1</span>
+                            <span class="fw-600">$120.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Subtotal</span>
+                    <span>$309.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Shipping</span>
+                    <span class="small">Calculated next</span>
+                </div>
+                <div class="d-flex justify-content-between mb-4">
+                    <span class="text-muted">Estimated Tax</span>
+                    <span>$24.72</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <h4 class="mb-0 fw-600">Total</h4>
+                    <h4 class="mb-0 fw-600">$333.72</h4>
+                </div>
+                
+                <div class="mt-4 pt-3 text-center border-top">
+                    <div class="d-flex justify-content-center gap-3 text-muted mb-3">
+                        <i class="bi bi-shield-check"></i>
+                        <i class="bi bi-lock"></i>
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <p class="small text-muted mb-0">SECURE SSL ENCRYPTED CHECKOUT • CARBON NEUTRAL SHIPPING</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

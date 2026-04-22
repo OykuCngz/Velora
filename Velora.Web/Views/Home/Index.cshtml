@@ -1,0 +1,117 @@
+@model IEnumerable<Velora.Core.Entities.Product>
+@{
+    ViewData["Title"] = "Velora - Atmospheric Minimalism";
+}
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-subtitle">New Season 2024</span>
+        <h1 class="hero-title">Artisanal objects for intentional living.</h1>
+        <p class="hero-description">Curated essentials that celebrate the beauty of simplicity and the permanence of craftsmanship.</p>
+        <div class="d-flex gap-3">
+            <a href="#shop" class="btn-velora">Shop Collection</a>
+            <a href="#" class="btn-outline-velora">Explore Lookbook</a>
+        </div>
+    </div>
+    <img src="/images/hero.png" class="hero-image" alt="Hero Image">
+</section>
+
+<section class="container py-5 mt-5">
+    <div class="section-header">
+        <div>
+            <span class="text-muted small text-uppercase letter-spacing-1">Featured Collections</span>
+            <h2 class="section-title">Curated themes for every corner.</h2>
+        </div>
+        <a href="#" class="text-dark fw-medium text-decoration-none small">View All Collections <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div class="category-grid">
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200" alt="Living Room">
+            <div class="category-overlay">
+                <h3>The Lighting Series</h3>
+                <p>Illuminate your seasonal mood with sculptural glass.</p>
+            </div>
+        </div>
+        <div class="category-card" style="grid-row: 1 / 3; grid-column: 2;">
+            <img src="https://images.unsplash.com/photo-1594913785162-e6785b423cb1?w=800" alt="Kitchenware">
+            <div class="category-overlay">
+                <h3>Artisan Kitchen</h3>
+                <p>Objects for mindful rituals.</p>
+            </div>
+        </div>
+        <div class="category-card">
+            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200" alt="Bedroom">
+            <div class="category-overlay">
+                <h3>Textiles</h3>
+                <p>Organic linens for serene rest.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="shop" class="container py-5 mb-5">
+    <div class="section-header">
+        <h2 class="section-title">Essential Pieces</h2>
+        <div class="d-flex gap-3">
+            <button class="btn btn-sm btn-outline-secondary border-0">All</button>
+            <button class="btn btn-sm text-muted border-0">Furniture</button>
+            <button class="btn btn-sm text-muted border-0">Lighting</button>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card">
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">
+                        <div class="product-image-wrapper">
+                            <img src="@item.ImageUrl" alt="@item.Name">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">@item.Category.Name</div>
+                            <h3 class="product-name text-dark">@item.Name</h3>
+                            <div class="product-price text-dark">@item.Price.ToString("C2")</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="values-section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-4">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="bi bi-leaf"></i>
+                    </div>
+                    <h4>Organic Materials</h4>
+                    <p class="text-muted small">We use 100% organic cotton, FSC-certified wood, and non-toxic dyes in all our products.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="bi bi-recycle"></i>
+                    </div>
+                    <h4>Zero-Waste Shipping</h4>
+                    <p class="text-muted small">All packaging is compostable or recyclable, with no single-use plastics involved.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </div>
+                    <h4>Fair Craftsmanship</h4>
+                    <p class="text-muted small">Every piece is created in small batches by artisans receiving beyond-fair wages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

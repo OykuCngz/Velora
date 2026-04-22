@@ -1,0 +1,12 @@
+[Bb]in/
+[Oo]bj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+appsettings.json
+ecommerce.db
+*.db-shm
+*.db-wal

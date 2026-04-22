@@ -1,0 +1,102 @@
+@model Velora.Core.Entities.Product
+@{
+    ViewData["Title"] = Model.Name + " - Velora";
+}
+
+<div class="container product-detail-container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">@Model.Category.Name</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        <div class="col-lg-7">
+            <div class="product-gallery">
+                <div class="product-gallery-main">
+                    <img src="@Model.ImageUrl" alt="@Model.Name">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="ps-lg-4">
+                <h1 class="product-title">@Model.Name</h1>
+                <div class="product-price-detail">@Model.Price.ToString("C2")</div>
+                
+                <p class="text-muted mb-5">@Model.Description</p>
+
+                <div class="mb-4">
+                    <span class="variant-label">Finish: Natural Ash</span>
+                    <div class="variant-options">
+                        <div class="variant-swatch active" style="background-color: #e5d5c5;"></div>
+                        <div class="variant-swatch" style="background-color: #2a2a2a;"></div>
+                        <div class="variant-swatch" style="background-color: #5d4037;"></div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <span class="variant-label">Fabric</span>
+                    <div class="variant-options">
+                        <button class="variant-button active">Boucle</button>
+                        <button class="variant-button">Linen Blend</button>
+                        <button class="variant-button">Aniline Leather</button>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="qty-selector">
+                        <button class="qty-btn" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                        <input class="qty-input" type="number" value="1" min="1">
+                        <button class="qty-btn" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                    </div>
+                    <button class="btn btn-velora flex-grow-1">Add to Cart</button>
+                </div>
+
+                <button class="btn btn-outline-dark w-100 mb-5 py-3">Express Checkout</button>
+
+                <div class="accordion details-accordion" id="productDetails">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#desc">
+                                Product Details
+                            </button>
+                        </h2>
+                        <div id="desc" class="accordion-collapse collapse show" data-bs-parent="#productDetails">
+                            <div class="accordion-body">
+                                Our @Model.Name is more than furniture; it is an invitation to pause. Crafted with a deliberate focus on tactile honesty and architectural silhouette, it anchors any space with a sense of serene permanence.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#care">
+                                Care Instructions
+                            </button>
+                        </h2>
+                        <div id="care" class="accordion-collapse collapse" data-bs-parent="#productDetails">
+                            <div class="accordion-body">
+                                Wipe with a damp cloth. For spills, blot immediately with a clean, absorbent white cloth or paper towel. Professional cleaning recommended for persistent stains.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ship">
+                                Shipping & Returns
+                            </button>
+                        </h2>
+                        <div id="ship" class="accordion-collapse collapse" data-bs-parent="#productDetails">
+                            <div class="accordion-body">
+                                Free standard shipping on orders over $500. Returns accepted within 30 days of delivery.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
