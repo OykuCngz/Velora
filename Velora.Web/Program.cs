@@ -11,6 +11,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseMiddleware<Velora.Web.Middleware.ExceptionHandlingMiddleware>();
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
