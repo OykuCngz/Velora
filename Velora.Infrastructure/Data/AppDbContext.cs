@@ -1,10 +1,11 @@
 using Velora.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Velora.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Velora.Infrastructure.Data;
 
-public class AppDbContext : DbContext, IApplicationDbContext
+public class AppDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
