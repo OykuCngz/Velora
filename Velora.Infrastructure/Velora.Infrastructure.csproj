@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Velora.Core\Velora.Core.csproj" />
+    <ProjectReference Include="..\Velora.Application\Velora.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

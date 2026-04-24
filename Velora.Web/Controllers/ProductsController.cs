@@ -1,23 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
-using Velora.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Velora.Application.Products.Queries;
 
 namespace Velora.Web.Controllers;
 
 public class ProductsController : Controller
 {
-    private readonly AppDbContext _context;
+    private readonly ISender _sender;
 
-    public ProductsController(AppDbContext context)
+    public ProductsController(ISender sender)
     {
-        _context = context;
+        _sender = sender;
     }
 
     public async Task<IActionResult> Details(int id)
     {
-        var product = await _context.Products
-            .Include(p => p.Category)
-            .FirstOrDefaultAsync(p => p.Id == id);
+        var product = await _sender.Send(new GetProductDetailsQuery(id));
 
         if (product == null)
         {

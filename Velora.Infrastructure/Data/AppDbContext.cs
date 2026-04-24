@@ -1,9 +1,10 @@
 using Velora.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Velora.Application.Common.Interfaces;
 
 namespace Velora.Infrastructure.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : DbContext, IApplicationDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
