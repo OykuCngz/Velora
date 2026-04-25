@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Velora.Application;
 using Velora.Infrastructure;
+using Velora.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,30 +15,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Velora API", Version = "v1" });
-    
-    var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Name = "JWT Authentication",
-        Description = "Tokenınızı buraya girin: `Bearer {token}`",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        Reference = new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-        {
-            {
-                new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                {
-                    Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                    {
-                        Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                new string[] {}
-            }
-        }
-    };
 
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
