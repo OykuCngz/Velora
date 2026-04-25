@@ -41,10 +41,16 @@
                         <i class="bi bi-search"></i>
                         <i class="bi bi-suit-heart"></i>
                         <i class="bi bi-person"></i>
-                        <div class="position-relative">
+                        <a asp-controller="Cart" asp-action="Index" class="text-dark text-decoration-none position-relative">
                             <i class="bi bi-bag"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" style="font-size: 0.6rem;">0</span>
-                        </div>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" style="font-size: 0.6rem;">
+                                @{
+                                    var cartData = Context.Session.GetString("VeloraCart");
+                                    var count = cartData == null ? 0 : System.Text.Json.JsonSerializer.Deserialize<List<Velora.Web.Controllers.CartItem>>(cartData).Sum(i => i.Quantity);
+                                }
+                                @count
+                            </span>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -60,7 +66,7 @@
             <div class="row g-5">
                 <div class="col-lg-4">
                     <a class="footer-brand" href="#">Velora</a>
-                    <p class="text-muted small">© 2024 Velora. Atmospheric Minimalism for the modern lifestyle. All rights reserved.</p>
+                    <p class="footer-text">© 2024 Velora. Atmospheric Minimalism for the modern lifestyle. All rights reserved.</p>
                 </div>
                 <div class="col-6 col-lg-2">
                     <h4 class="footer-links-title">Shop</h4>
@@ -80,7 +86,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h4 class="footer-links-title">Join our community</h4>
-                    <p class="text-muted small mb-3">Newsletter için kayıt olun.</p>
+                    <p class="footer-text mb-4">Newsletter için kayıt olun.</p>
                     <div class="d-flex gap-2">
                         <input type="email" class="newsletter-input m-0" placeholder="E-posta adresiniz">
                         <button class="btn btn-velora py-2" style="height: fit-content;">Kayıt Ol</button>

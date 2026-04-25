@@ -17,13 +17,18 @@ public class ExceptionHandlingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        _logger.LogInformation("Gelen İstek: {Method} {Path}", context.Request.Method, context.Request.Path);
+        
         try
         {
             await _next(context);
+            _logger.LogInformation("İstek Tamamlandı: {Method} {Path} - {StatusCode}", 
+                context.Request.Method, context.Request.Path, context.Response.StatusCode);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Bir hata oluştu: {Message}", ex.Message);
+            _logger.LogError(ex, "HATA OLUŞTU: {Method} {Path} - {Message}", 
+                context.Request.Method, context.Request.Path, ex.Message);
             await HandleExceptionAsync(context, ex);
         }
     }

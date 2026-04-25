@@ -1,0 +1,50 @@
+@model Velora.Core.Entities.Product
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Add New Product";
+}
+
+<div class="mb-5">
+    <a asp-action="Index" class="text-decoration-none text-muted small"><i class="bi bi-arrow-left"></i> Back to List</a>
+    <h2 class="fw-bold mt-2">Add New Product</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="admin-card">
+            <form asp-action="Create" method="post">
+                <div class="row g-4">
+                    <div class="col-md-12">
+                        <label class="form-label fw-bold">Product Name</label>
+                        <input asp-for="Name" class="form-control py-2" placeholder="Enter product name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Category</label>
+                        <select asp-for="CategoryId" class="form-select py-2" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Price ($)</label>
+                        <input asp-for="Price" type="number" step="0.01" class="form-control py-2" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Stock</label>
+                        <input asp-for="StockQuantity" type="number" class="form-control py-2" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea asp-for="Description" class="form-control py-2" rows="4"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label fw-bold">Image URL</label>
+                        <input asp-for="ImageUrl" class="form-control py-2" placeholder="/images/product.png">
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <button type="submit" class="btn btn-dark px-5 py-2">Create Product</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

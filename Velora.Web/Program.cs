@@ -4,10 +4,32 @@ using Microsoft.IdentityModel.Tokens;
 using Velora.Application;
 using Velora.Infrastructure;
 using Velora.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using Velora.Core.Entities;
+using Serilog;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Stripe Yapılandırması
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
+// Serilog Yapılandırması
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -75,7 +97,9 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
-    Velora.Infrastructure.Services.DbSeeder.Seed(context);
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await Velora.Infrastructure.Services.DbSeeder.SeedAsync(context, userManager, roleManager);
 }
 
 if (!app.Environment.IsDevelopment())
@@ -87,10 +111,23 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+var supportedCultures = new[] { "tr-TR", "en-US" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
+
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+    name: "MyArea",
+    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

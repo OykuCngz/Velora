@@ -52,7 +52,7 @@
                         <input class="qty-input" type="number" value="1" min="1">
                         <button class="qty-btn" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
                     </div>
-                    <button class="btn btn-velora flex-grow-1">Add to Cart</button>
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.Id" class="btn btn-velora flex-grow-1">Add to Cart</a>
                 </div>
 
                 <button class="btn btn-outline-dark w-100 mb-5 py-3">Express Checkout</button>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Velora Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/velora.css" asp-append-version="true" />
+    <style>
+        :root {
+            --sidebar-width: 260px;
+        }
+        body { background-color: #f4f7f6; }
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #121212;
+            color: white;
+            padding: 2rem 1.5rem;
+            z-index: 100;
+        }
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem;
+        }
+        .nav-admin-link {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        .nav-admin-link:hover, .nav-admin-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .admin-card {
+            background: white;
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding: 1.5rem;
+        }
+        .stat-value { font-size: 1.8rem; font-weight: 600; margin: 0.5rem 0; }
+        .stat-label { color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h3 class="mb-5 fw-bold">Velora Admin</h3>
+        <nav>
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-admin-link active">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+            <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="nav-admin-link">
+                <i class="bi bi-box-seam"></i> Products
+            </a>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="nav-admin-link">
+                <i class="bi bi-cart3"></i> Orders
+            </a>
+            <a href="#" class="nav-admin-link">
+                <i class="bi bi-people"></i> Customers
+            </a>
+            <a href="#" class="nav-admin-link">
+                <i class="bi bi-gear"></i> Settings
+            </a>
+        </nav>
+        
+        <div style="position: absolute; bottom: 2rem; width: calc(100% - 3rem);">
+            <a href="/" class="nav-admin-link">
+                <i class="bi bi-arrow-left"></i> View Store
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

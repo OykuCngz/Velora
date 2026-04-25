@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Velora.Core.Entities;
 using Velora.Infrastructure.Data;
 
@@ -5,9 +6,36 @@ namespace Velora.Infrastructure.Services;
 
 public static class DbSeeder
 {
-    public static void Seed(AppDbContext context)
+    public static async Task SeedAsync(AppDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         context.Database.EnsureCreated();
+
+        // Rollere Ekleme
+        string[] roleNames = { "Admin", "Customer" };
+        foreach (var roleName in roleNames)
+        {
+            if (!await roleManager.RoleExistsAsync(roleName))
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        // Admin Kullanıcısı Oluşturma
+        var adminEmail = "admin@velora.com";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
+        {
+            adminUser = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FirstName = "Velora",
+                LastName = "Admin",
+                EmailConfirmed = true
+            };
+            await userManager.CreateAsync(adminUser, "Admin123!");
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
 
         if (context.Products.Any())
         {

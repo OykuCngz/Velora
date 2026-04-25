@@ -1,0 +1,99 @@
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+        <h2 class="fw-bold m-0">Dashboard Overview</h2>
+        <p class="text-muted">Welcome back, Admin. Here's what's happening today.</p>
+    </div>
+    <button class="btn btn-dark px-4">Download Report</button>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="admin-card">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value">$124,592</div>
+            <div class="text-success small"><i class="bi bi-arrow-up"></i> 12.5% vs last month</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="admin-card">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value">1,240</div>
+            <div class="text-success small"><i class="bi bi-arrow-up"></i> 5.2% vs last month</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="admin-card">
+            <div class="stat-label">Active Users</div>
+            <div class="stat-value">842</div>
+            <div class="text-danger small"><i class="bi bi-arrow-down"></i> 2.1% vs last week</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="admin-card">
+            <div class="stat-label">Conversion Rate</div>
+            <div class="stat-value">3.4%</div>
+            <div class="text-success small"><i class="bi bi-arrow-up"></i> 0.4% vs last week</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="admin-card h-100">
+            <h5 class="fw-bold mb-4">Revenue Growth</h5>
+            <canvas id="revenueChart" height="250"></canvas>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="admin-card h-100">
+            <h5 class="fw-bold mb-4">Top Categories</h5>
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000],
+                    borderColor: '#1a4d4a',
+                    backgroundColor: 'rgba(26, 77, 74, 0.05)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        const catCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(catCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Lighting', 'Kitchen', 'Furniture', 'Textiles'],
+                datasets: [{
+                    data: [30, 25, 35, 10],
+                    backgroundColor: ['#1a4d4a', '#d4a373', '#121212', '#666666'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+}

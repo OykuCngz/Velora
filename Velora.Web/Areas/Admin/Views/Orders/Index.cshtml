@@ -1,0 +1,52 @@
+@model IEnumerable<Velora.Core.Entities.Order>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Order Management";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+        <h2 class="fw-bold m-0">Order Management</h2>
+        <p class="text-muted">Monitor and manage customer orders.</p>
+    </div>
+</div>
+
+<div class="admin-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">#@order.Id</td>
+                        <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                        <td>@order.CustomerEmail</td>
+                        <td>@order.TotalAmount.ToString("C2")</td>
+                        <td>
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Completed</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-light">Details</button>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">No orders found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
